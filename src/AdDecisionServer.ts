@@ -1,4 +1,4 @@
-import { RemovalPolicy } from 'aws-cdk-lib';
+import { RemovalPolicy, Stack } from 'aws-cdk-lib';
 import {
   RestApi,
   LambdaIntegration,
@@ -38,7 +38,7 @@ export class AdDecisionServer extends Construct {
 
     // Create a CloudWatch log group
     const logGroup = new LogGroup(this, 'ApiGatewayLogGroup', {
-      logGroupName: '/aws/apigateway/ads-logs',
+      logGroupName: `/aws/apigateway/ads-logs-${Stack.of(this)}`,
       removalPolicy: RemovalPolicy.DESTROY,
     });
     logGroup.grantWrite(executeRole);
